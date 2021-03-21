@@ -48,7 +48,7 @@ configure router ospf traffic-engineering
 
 configure router ospf rsvp-shortcut
 
-######### LDP-over-RSVP
+######## LDP-over-RSVP
 
 configure router ospf ldp-over-rsvp
 
@@ -70,7 +70,7 @@ configure router ldp shortcut-transit-ttl-propagate (turns on uniform mode for t
 
 configure router ldp no shortcut-transit-ttl-propagate (turns on pipe mode for transit traffic)
 
-######### T-LDP
+######## T-LDP
 
 configure router ldp targeted-session peer 10.10.10.9 {tunneling}
 
@@ -88,7 +88,7 @@ configure router bgp group <group-id> next-hop-self
 
 configure router bgp export <policy-stmt>
 
-######### BGP Next-hop resolution with tunnels
+######## BGP Next-hop resolution with tunnels
 
 configure router bgp next-hop-resolution shortcut-tunnel family ipv4 resolution any
 
@@ -112,7 +112,7 @@ configure router rsvp no shutdown
 
 configure router mpls interface {interface name} no shutdown
 
-######### Path Creation
+######## Path Creation
 
 configure router mpls path pathToRx shutdown
 
@@ -120,7 +120,7 @@ configure router mpls path pathToRx hop 10 10.10.10.6 {strict | loose}
 
 configure router mpls path pathToRx no shutdown
 
-######### Creation of LSP
+######## Creation of LSP
 
 configure router mpls lsp lspToRx shut
 
@@ -134,7 +134,7 @@ configure router mpls lsp lspToRx secondary <Path Name> [exclude red] no shutdow
 
 configure router mpls lsp lspToRx no shutdown
 
-######### PIPE mode vs Uniform mode
+######## PIPE mode vs Uniform mode
 
 configure router rsvp shortcut-local-ttl-propagate (turns on uniform mode for local traffic)
 
@@ -156,7 +156,7 @@ configure router interface "ToR9" ipv6 (link local)
 
 configure router interface "system" ipv6 address fd00:7:7::5/128
 
-######### OSPFv3 config
+######## OSPFv3 config
 
 configure router ospf3 area 0 interface "system" interface-type point-to-point
 
@@ -166,11 +166,11 @@ configure router ospf3 asbr
 
 configure router ospf3 no shutdown
 
-######### LDP IPv6
+######## LDP IPv6
 
 configure router ldp interface-parameters interface "toR4" dual-stack ipv4 no shutdown
 
-######### MP-BGP config
+######## MP-BGP config
 
 configure router autonomous-system {AS Number}
 
