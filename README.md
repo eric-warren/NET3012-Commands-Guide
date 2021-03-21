@@ -207,35 +207,35 @@ configure port 1/1/2 no shut
 
 configure service sdp {sdp-id} mpls create
 
-&nbsp;&nbsp; far-end 10.10.10.x
+&nbsp;&nbsp;&nbsp; far-end 10.10.10.x
 
-&nbsp;&nbsp; ldp
+&nbsp;&nbsp;&nbsp; ldp
 
-&nbsp;&nbsp; lsp {lsp-name}
+&nbsp;&nbsp;&nbsp; lsp {lsp-name}
 
-&nbsp;&nbsp; no shut
+&nbsp;&nbsp;&nbsp; no shut
 
-&nbsp;&nbsp; exit
+&nbsp;&nbsp;&nbsp; exit
 
 configure service customer 1 create
 
-&nbsp;&nbsp; exit
+&nbsp;&nbsp;&nbsp; exit
 
 configure service epipe {service-id} customer 1 create
 
-&nbsp;&nbsp; sap 1/1/2:{q-tag} create
+&nbsp;&nbsp;&nbsp; sap 1/1/2:{q-tag} create
 
-&nbsp;&nbsp;&nbsp;&nbsp; no shut
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; no shut
 
-&nbsp;&nbsp;&nbsp;&nbsp; exit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit
 
-&nbsp;&nbsp; spoke-sdp {sdp-id}:{vc-id} create
+&nbsp;&nbsp;&nbsp; spoke-sdp {sdp-id}:{vc-id} create
 
-&nbsp;&nbsp;&nbsp;&nbsp; no shut
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; no shut
 
-&nbsp;&nbsp;&nbsp;&nbsp; exit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit
 
-&nbsp;&nbsp; no shut
+&nbsp;&nbsp;&nbsp; no shut
 
 ## VPLS:
 
