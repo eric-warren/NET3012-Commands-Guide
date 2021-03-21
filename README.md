@@ -308,6 +308,14 @@ configure service vpls {service-id} customer 1 create
 
 tree flat | match "keyword"
 
+### General Commands
+
+show router status
+
+show router route-table
+
+show router tunnel-table
+
 ### Port Commands
 
 show port
@@ -337,3 +345,17 @@ show router ospf interface
 show router ospf database
 
 show router ospf area {area-num} [detail]
+
+### LDP Commands
+
+show router ldp status
+
+show router ldp bindings [active]
+
+show router ldp parameters
+
+show router ldp discovery [detail] 
+
+show router ldp interface
+
+show router ldp session
