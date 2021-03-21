@@ -301,3 +301,39 @@ configure service vpls {service-id} customer 1 create
 &nbsp;&nbsp;&nbsp; no shut
 
 &nbsp;&nbsp;&nbsp; exit
+
+## Troubleshooting
+
+### Search for a Command
+
+tree flat | match "keyword"
+
+### Port Commands
+
+show port
+
+show port 1/1/x [detail]
+
+### Interface Commands
+
+show router interface
+
+show router interface "int-name" detail
+
+show router interface summary
+
+### OSPF Commands
+
+show router ospf status
+
+show router ospf routes
+
+show router ospf opaque-database
+
+show router ospf neighbor
+
+show router ospf interface
+
+show router ospf database
+
+show router ospf area {area-num} [detail]
