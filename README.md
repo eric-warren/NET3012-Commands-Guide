@@ -35,10 +35,6 @@ configure router router-id <32-bit-ID>
 
 configure router ospf area <area #> interface <interface name> interface-type <point-to-point>
 
-configure router ospf asbr
-
-configure router ospf traffic-engineering
-
 configure router ospf area 0 nssa
 
 configure router ospf area 0 stub
@@ -47,9 +43,15 @@ configure router ospf area 2 stub no summaries (totally stubby area)
 
 configure router ospf export {Policy Name}
 
+configure router ospf traffic-engineering
+
 configure router ospf rsvp-shortcut
 
+###### LDP-over-RSVP
+
 configure router ospf ldp-over-rsvp
+
+configure router ospf asbr
 
 ## LDP:
 
