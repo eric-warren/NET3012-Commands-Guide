@@ -132,6 +132,8 @@ configure router mpls lsp lspToRx primary <Path Name> [include green] no shutdow
 
 configure router mpls lsp lspToRx secondary <Path Name> [exclude red] no shutdown
 
+configure router mpls lsp lspToRx secondary <Path Name> [standby] no shutdown
+
 configure router mpls lsp lspToRx no shutdown
 
 ###### PIPE mode vs Uniform mode
@@ -316,6 +318,20 @@ show router route-table
 
 show router tunnel-table
 
+telnet <management ip address>
+  
+ping <ip-address>
+  
+traceroute <ip-route>
+  
+oam lsp-ping prefix <ip-address>
+  
+oam lsp-trace prefix <ip-address>
+  
+oam ldp-treetrace prefix <ip-address>
+  
+show router ecmp
+
 ### Port Commands
 
 show port
@@ -359,3 +375,27 @@ show router ldp discovery [detail]
 show router ldp interface
 
 show router ldp session
+
+clear router ldp session <neighbor-ip-address>
+
+### MPLS/RSVP Commands
+
+tools perform router mpls resignal lsp <lsp-name> path <path-name>
+
+show router mpls status
+
+show router mpls path
+
+show router mpls lsp [detail]
+
+show router mpls lsp <lsp-name> path detail
+  
+show router mpls interface
+
+show router rsvp status
+
+show router rsvp session
+
+show router rsvp interface [detail]
+
+show router rsvp neighbor
