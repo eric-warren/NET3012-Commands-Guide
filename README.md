@@ -98,6 +98,8 @@ configure router policy-options begin
 
 configure router policy-options policy-statement <policy name> entry <number> from protocol {direct | ospf | bgp | isis | rip}
 
+configure router policy-options policy-statement <policy name> entry <number> to protocol {direct | ospf | bgp | isis | rip}
+
 configure router policy-options policy-statement <policy name> entry <number> action {accept | next-entry | next-policy | reject}
 
 exit
@@ -303,6 +305,32 @@ configure service vpls {service-id} customer 1 create
 &nbsp;&nbsp;&nbsp; no shut
 
 &nbsp;&nbsp;&nbsp; exit
+
+### IES
+
+#### IES Core router
+
+configure service ies x000 customer 1 create
+
+&nbsp;&nbsp;&nbsp;interface toRx_ies create
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address 172.17.X.1/24
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip-mtu 1500
+
+&nbsp;&nbsp;&nbsp;spoke-sdp X:x000 create
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no shut
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit
+
+&nbsp;&nbsp;&nbsp;no shut
+
+&nbsp;&nbsp;&nbsp;exit
+
+#### CE
+
+configure router ospf area 0 interface "toRX" mtu 1500
 
 ## Troubleshooting
 
