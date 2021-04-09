@@ -48,7 +48,10 @@ configure router ospf traffic-engineering
 
 configure router ospf rsvp-shortcut
 
-###### LDP-over-RSVP
+###### 
+
+
+-over-RSVP
 
 configure router ospf ldp-over-rsvp
 
@@ -499,7 +502,13 @@ configure router
 
 &nbsp;&nbsp;&nbsp; no shutdown
 
+### Resilance 
 
+configure router mpls lsp <lsp-name> secondary <path-name>  # Def'n of sec
+  
+configure router mpls lsp <lsp-name> secondary <path-name> standby  # (hot) standby
+  
+configure router mpls lsp <lsp-name> fast-reroute facility   # Bypass tunnel
 
 
 ## Troubleshooting
@@ -602,4 +611,48 @@ show router rsvp neighbor
 
 ### General
 
-- test1
+- Configure and no shut ports
+- Ensure interfaces have right ips and ports
+- Configure a router ID
+
+### RSVP
+- ensure IGP is working
+- OSPF Traffic engineering
+
+### BGP
+- Ensure a autonomous system is configured
+
+### LDP over RSVP
+- T-ldp from abr to abr 
+- LSP from abr to abr 
+- enable ldp over rsvp
+
+### 6PE
+- Configure ospv3
+- Ensure to put in asbr command
+- COnfigure epxort policies in both directions
+
+### EPIPE
+- Configure CE with dot1q and no shut
+- On ce configure interface with 1/1/1:XXX
+- On PE configure ethernet mode access and dot1q
+- Configure Customer
+- Configure sdp and enabled ldp in sdp if using ldp
+- Configure sap and spoke-sdp
+
+### VPLS
+- Configure CE with dot1q and no shut
+- On ce configure interface with 1/1/1:XXX
+- On PE configure ethernet mode access and dot1q
+- Configure Customer
+- Configure sdp and enabled ldp in sdp if using ldp
+- Configure sap and spoke/mesh sdp
+
+### IES
+- Change MTU in IES
+- CHnage ospf MTU
+
+### VPRN
+- Use family vpn-ipv4 MPBGP
+- configure router-id in service
+- Set RD and RT
