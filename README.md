@@ -335,91 +335,170 @@ configure router ospf area 0 interface "toRX" mtu 1500
 ### VPRN
 
 #### PE:
+
 configure router autonomous-system 64496
+
 configure router bgp
+
 &nbsp;&nbsp;&nbsp; group MPBGP
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; family vpn-ipv4
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; neighbor 10.10.10.y peer-as 64496
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; local-address 10.10.10.x
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; no shutdown
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit
+
 &nbsp;&nbsp;&nbsp; no shutdown
+
 
 configure service customer {110/120} create
+
 &nbsp;&nbsp;&nbsp; description {Blue/Red}
+
 &nbsp;&nbsp;&nbsp; exit
+
 
 vprn {serv#} customer {cus#} create
+
 &nbsp;&nbsp;&nbsp; description VPRN for {Blue/Red}
+
 &nbsp;&nbsp;&nbsp; router-id 10.10.10.x
+
 &nbsp;&nbsp;&nbsp; auto-bind-tunnel resolution-filter ldp
+
 &nbsp;&nbsp;&nbsp; auto-bind-tunnel resolution filter
+
 &nbsp;&nbsp;&nbsp; auto-bind-tunnel any
+
 &nbsp;&nbsp;&nbsp; route-distinguisher 64496:{110/120}
+
 &nbsp;&nbsp;&nbsp; vrf-target target:64496:{110/120}
+
 &nbsp;&nbsp;&nbsp; interface toRX_VPRN create
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; address 10.x.x.x/24
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sap 1/1/2:{110/120} create
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; no shutdown
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; no shutdown
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp exit
+
 &nbsp;&nbsp;&nbsp; no shutdown
 
+
 configure router policy-options
+
 &nbsp;&nbsp;&nbsp; begin
+
 &nbsp;&nbsp;&nbsp; policy-statement mpbpg-bgp
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entry 10
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; from protocol bgp-vpn
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; action accept
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit
+
 &nbsp;&nbsp;&nbsp;exit
+
 &nbsp;&nbsp;&nbsp;commit
 
+
 configure service vprn {serv#}
+
 &nbsp;&nbsp;&nbsp; shutdown
+
 &nbsp;&nbsp;&nbsp; autonomous-system 64496
+
 &nbsp;&nbsp;&nbsp; bgp
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; group toRX_CE_BGP
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; neighbor 10.x.x.x peer-as XXXXX
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; export mpbpg-bgp
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; no shutdown
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; no shutdown
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit
+
 &nbsp;&nbsp;&nbsp; no shutdown
+
 
 #### CE:
+
 configure router interface to_Rx-{110/120}
+
 &nbsp;&nbsp;&nbsp; port 1/1/2:{110/120}
+
 &nbsp;&nbsp;&nbsp; address 10.x.x.x/24
+
 &nbsp;&nbsp;&nbsp; no shutdown
+
 &nbsp;&nbsp;&nbsp; exit
+
 
 configure router policy-options
+
 &nbsp;&nbsp;&nbsp; begin
+
 &nbsp;&nbsp;&nbsp; policy-statement direct-bgp
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entry 10
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; from protocol direct
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to protocol bgp
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; action accept
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit
+
 &nbsp;&nbsp;&nbsp; exit
+
 commit
 
+
 configure router
+
 &nbsp;&nbsp;&nbsp; autonomous-system XXXXX
+
 &nbsp;&nbsp;&nbsp; bgp
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; group toRX_PE
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; neighbor 10.x.x.x peer-as 64496
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; export direct-bgp
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; no shutdown
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no shutdown
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit
+
 &nbsp;&nbsp;&nbsp; no shutdown
+
 
 
 
