@@ -597,3 +597,10 @@ show router rsvp session
 show router rsvp interface [detail]
 
 show router rsvp neighbor
+
+## Config Checklist
+
+### General
+
+- [x] test
+- [ ] test1
