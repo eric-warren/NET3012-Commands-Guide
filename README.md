@@ -602,5 +602,4 @@ show router rsvp neighbor
 
 ### General
 
-- [x] test
-- [ ] test1
+- test1
