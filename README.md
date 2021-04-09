@@ -502,13 +502,23 @@ configure router
 
 &nbsp;&nbsp;&nbsp; no shutdown
 
-### Resilance 
+### Resilience
 
-configure router mpls lsp <lsp-name> secondary <path-name>  # Def'n of sec
+configure router mpls lsp <lsp-name> secondary <path-name>  # Def'n of secondary
   
 configure router mpls lsp <lsp-name> secondary <path-name> standby  # (hot) standby
   
 configure router mpls lsp <lsp-name> fast-reroute facility   # Bypass tunnel
+  
+### SRLG
+
+configure router if-attribute srlg-group <name> value {number} # Definition of the group
+  
+configure router mpls interface <name> srlg-group <name> # Define link membership
+  
+configure router mpls lsp <name> cspf # Enable CSPF; NEEDED!
+  
+configure router mpls lsp <name> secondary <path> srlg # Enable use of SRLG
 
 
 ## Troubleshooting
